@@ -1,7 +1,8 @@
-import { ArrowLeft, Camera } from 'phosphor-react'
-import React from 'react'
+import React, { FormEvent, useState } from 'react'
+import { ArrowLeft } from 'phosphor-react'
 import { FeedbackType, feedbackTypes } from '..'
 import { CloseButton } from '../../CloseButton'
+import { ScreenshotButton } from '../ScreenshotButton'
 
 interface FeedbackContentStepProps {
   feedbackType: FeedbackType
@@ -9,7 +10,19 @@ interface FeedbackContentStepProps {
 }
 
 export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested }: FeedbackContentStepProps) {
+  const [screenshot, setScreenshot] = useState<string | null>(null)
+  const [comment, setComment] = useState('')
+
   const feedbackTypeInfo = feedbackTypes[feedbackType]
+
+  function handleSubmitFeedback(event: FormEvent) {
+    event.preventDefault()
+
+    console.log({
+      screenshot,
+      comment
+    })
+  }
 
   return (
     <>
@@ -36,8 +49,9 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested }
         <CloseButton />
       </header>
 
-      <form className="my-4 w-full">
+      <form className="my-4 w-full" onSubmit={handleSubmitFeedback}>
         <textarea
+          onChange={event => setComment(event.target.value)}
           className="
             min-w-[304px]
             w-full
@@ -53,7 +67,6 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested }
             focus:ring-1
             focus:outline-none
             resize-none
-            scrollbar
             scrollbar-thumb-zinc-700
             scrollbar-track-transparent
             scrollbar-thin
@@ -62,27 +75,14 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested }
         />
 
         <footer className="flex gap-2 mt-2">
-          <button
-            type="button"
-            className="
-              p-2
-              bg-zinc-800
-              rounded-md
-              border-transparent
-              hover:bg-zinc-700
-              focus:outline-none
-              focus:ring-2
-              focus:ring-offset-2
-              focus:ring-offset-zinc-900
-              focus:ring-brand-500
-              transition-colors
-            "
-          >
-            <Camera className="w-6 h-6" />
-          </button>
+          <ScreenshotButton
+            screenshot={screenshot}
+            onScreenshotTook={setScreenshot}
+          />
 
           <button
             type="submit"
+            disabled={comment.length === 0}
             className="
               p-2
               bg-brand-500
@@ -100,6 +100,8 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested }
               focus:ring-offset-zinc-900
               focus:ring-brand-500
               transition-colors
+              disabled:opacity-50
+              disabled:hover:bg-brand-500
             "
           >
             Enviar feedback
