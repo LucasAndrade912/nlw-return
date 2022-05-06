@@ -51,7 +51,7 @@ export function Widget() {
       >
         {
           feedbackSent ? (
-            <Success />
+            <Success onSendAnotherFeedback={handleFeedbackRestart} />
           ) : (
             <>
               {
