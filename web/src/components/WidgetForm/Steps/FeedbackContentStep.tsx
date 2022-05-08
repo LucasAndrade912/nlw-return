@@ -48,8 +48,10 @@ export function FeedbackContentStep({
             top-5
             left-5
             absolute
-            text-zinc-400
-            hover:text-zinc-100
+            text-zinc-500
+            hover:text-zinc-800
+            dark:text-zinc-400
+            dark:hover:text-zinc-100
           "
         >
           <ArrowLeft weight="bold" className="w-4 h-4" />
@@ -71,9 +73,11 @@ export function FeedbackContentStep({
             w-full
             min-h-[112px]
             text-sm
-            placeholder-zinc-400
-            text-zinc-100
-            border-zinc-600
+            placeholder-zinc-500
+            dark:placeholder-zinc-400
+            dark:text-zinc-100
+            border-zinc-300
+            dark:border-zinc-600
             bg-transparent
             rounded-md
             focus:border-brand-500
@@ -81,7 +85,8 @@ export function FeedbackContentStep({
             focus:ring-1
             focus:outline-none
             resize-none
-            scrollbar-thumb-zinc-700
+            scrollbar-thumb-zinc-500
+            dark:scrollbar-thumb-zinc-700
             scrollbar-track-transparent
             scrollbar-thin
           "
@@ -98,6 +103,7 @@ export function FeedbackContentStep({
             type="submit"
             disabled={comment.length === 0 || isSendingFeedback}
             className="
+              text-white
               p-2
               bg-brand-500
               rounded-md
@@ -111,7 +117,8 @@ export function FeedbackContentStep({
               focus:outline-none
               focus:ring-2
               focus:ring-offset-2
-              focus:ring-offset-zinc-900
+              focus:ring-offset-white
+              dark:focus:ring-offset-zinc-900
               focus:ring-brand-500
               transition-colors
               disabled:opacity-50

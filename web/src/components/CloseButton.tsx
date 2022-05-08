@@ -9,8 +9,10 @@ export function CloseButton() {
         top-5
         right-5
         absolute
-        text-zinc-400
-        hover:text-zinc-100
+        text-zinc-500
+        hover:text-zinc-800
+        dark:text-zinc-400
+        dark:hover:text-zinc-100
       "
       title="Fechar formulário de feedback"
     >

@@ -35,12 +35,14 @@ export function FeedbackSuccessStep({ onFeedbackRestartRequested }: FeedbackSucc
             py-2
             px-6
             mt-6
-            bg-zinc-800
+            bg-zinc-100
+            dark:bg-zinc-800
             border-transparent
             text-sm
             leading-6
             rounded-md
-            hover:bg-zinc-700
+            hover:bg-zinc-300
+            dark:hover:bg-zinc-700
             transition-colors
             focus:outline-none
             focus:ring-2
