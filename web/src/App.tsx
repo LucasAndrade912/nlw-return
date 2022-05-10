@@ -35,6 +35,24 @@ export function App() {
 
   return (
     <>
+      <a
+        className="
+          transition-colors
+        text-brand-500
+        hover:text-brand-300
+          underline
+          underline-offset-2
+          cursor-pointer
+          p-2
+          rounded-md
+          absolute
+          top-5
+          left-5
+        "
+      >
+        Dashboard
+      </a>
+
       <ToggleThemeButton
         theme={theme!}
         onChangeTheme={onChangeTheme}
