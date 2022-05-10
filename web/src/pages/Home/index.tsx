@@ -1,55 +1,43 @@
-import React from 'react'
-import googleImgUrl from '../../assets/google-icon.svg'
+import React, { useEffect, useState } from 'react'
+import { ToggleThemeButton } from '../../components/ToggleThemeButton'
+import { useOutletContext } from 'react-router-dom'
+import { Widget } from '../../components/Widget'
+import { Theme } from '../../App'
+
+type AppContext = [
+  theme: Theme,
+  onChangeTheme: () => void
+]
 
 export function Home() {
+  const [theme, onChangeTheme] = useOutletContext<AppContext>()
+
   return (
-    <div
-      className="
-        w-full
-        h-screen
-        bg-brand-500
-        text-white
-        pt-56
-        flex
-        flex-col
-        items-center
-      "
-    >
-      <div className="inline">
-        <h1 className="text-5xl mb-10">
-          Bem-vindo ao FeedGet!
-        </h1>
-
-        <h2 className="text-2xl">
-          Faça login para acessar a página
-        </h2>
-      </div>
-
-      <button
+    <>
+      <a
         className="
-          mt-16
-          rounded-md
-          py-4
-          px-6
-          bg-zinc-100
-          hover:bg-white
-          text-zinc-800
           transition-colors
-          flex
-          items-center
-          justify-center
+        text-brand-500
+        hover:text-brand-300
+          underline
+          underline-offset-2
+          cursor-pointer
+          p-2
+          rounded-md
+          absolute
+          top-5
+          left-5
         "
       >
-        <img
-          src={googleImgUrl}
-          alt="Logo da Google"
-          width={32}
-        />
+        Dashboard
+      </a>
 
-        <span className="text-lg ml-2">
-          Login with Google
-        </span>
-      </button>
-    </div>
+      <ToggleThemeButton
+        theme={theme!}
+        onChangeTheme={onChangeTheme}
+      />
+
+      <Widget />
+    </>
   )
 }

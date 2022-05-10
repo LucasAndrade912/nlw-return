@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { ToggleThemeButton } from './components/ToggleThemeButton'
-import { Widget } from './components/Widget'
+import { useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
-type Theme = 'dark' | 'light'
+export type Theme = 'dark' | 'light'
 
 export function App() {
+  const navigate = useNavigate()
   const [theme, setTheme] = useState<Theme>(getTheme())
 
   function getTheme() {
@@ -33,32 +34,13 @@ export function App() {
     localStorage.setItem('theme', theme)
   }, [theme])
 
+  useEffect(() => {
+    navigate('/home')
+  }, [])
+
   return (
     <>
-      <a
-        className="
-          transition-colors
-        text-brand-500
-        hover:text-brand-300
-          underline
-          underline-offset-2
-          cursor-pointer
-          p-2
-          rounded-md
-          absolute
-          top-5
-          left-5
-        "
-      >
-        Dashboard
-      </a>
-
-      <ToggleThemeButton
-        theme={theme!}
-        onChangeTheme={onChangeTheme}
-      />
-
-      <Widget />
+      <Outlet context={[theme, onChangeTheme]} />
     </>
   )
 }
