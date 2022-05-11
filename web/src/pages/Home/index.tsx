@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useOutletContext, Link } from 'react-router-dom'
 import { ToggleThemeButton } from '../../components/ToggleThemeButton'
-import { useOutletContext } from 'react-router-dom'
 import { Widget } from '../../components/Widget'
 import { Theme } from '../../App'
 
@@ -14,7 +14,8 @@ export function Home() {
 
   return (
     <>
-      <a
+      <Link
+        to="/dashboard"
         className="
           transition-colors
         text-brand-500
@@ -30,7 +31,7 @@ export function Home() {
         "
       >
         Dashboard
-      </a>
+      </Link>
 
       <ToggleThemeButton
         theme={theme!}
