@@ -10,9 +10,9 @@ export default () => {
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="home" element={<Home />} />
-        <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
       </Route>
+      <Route path="login" element={<Login />} />
     </Routes>
   )
 }
