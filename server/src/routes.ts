@@ -1,9 +1,30 @@
 import { Router } from 'express'
 import { NodemailerMailAdapter } from './adapters/nodemailer/NodemailerMailAdapter'
+import { AuthMiddleware, CustomRequest } from './middlewares/AuthMiddleware'
+import { HandleUserMiddleware } from './middlewares/HandleUserMiddleware'
 import { PrismaFeedbacksRepository } from './repositories/prisma/PrismaFeedbacksRepository'
 import { SubmitFeedbackUseCase } from './useCases/SubmitFeedbackUseCase'
 
 export const routes = Router()
+
+routes.get('/feedbacks',
+  AuthMiddleware.authenticate,
+  HandleUserMiddleware.handle,
+  async (req: CustomRequest, res) => {
+    const { uid } = req
+
+    try {
+      const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
+
+      const feedbacks = await prismaFeedbacksRepository.findAll(uid as string)
+    
+      return res.json({ feedbacks })
+    } catch (error) {
+      console.log(error)
+      return res.status(400).send()
+    }
+  }
+)
 
 routes.post('/feedbacks', async (req, res) => {
   const { type, comment, screenshot } = req.body
