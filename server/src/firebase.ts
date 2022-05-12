@@ -5,9 +5,9 @@ dotenv.config()
 
 export function initFirebaseApp() {
 	const serviceAccount = {
-		projectId: process.env.PROJECT_ID,
-		clientEmail: process.env.CLIENT_EMAIL,
-		privateKey: process.env.PRIVATE_KEY
+		projectId: String(process.env.PROJECT_ID),
+		clientEmail: String(process.env.CLIENT_EMAIL),
+		privateKey: String(process.env.PRIVATE_KEY)
 	}
 
 	initializeApp({
