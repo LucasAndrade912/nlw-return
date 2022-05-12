@@ -26,21 +26,27 @@ routes.get('/feedbacks',
   }
 )
 
-routes.post('/feedbacks', async (req, res) => {
-  const { type, comment, screenshot } = req.body
+routes.post('/feedbacks',
+  AuthMiddleware.authenticate,
+  HandleUserMiddleware.handle,
+  async (req: CustomRequest, res) => {
+    const { uid } = req
+    const { type, comment, screenshot } = req.body
 
-  const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
-  const nodemailerMailAdapter = new NodemailerMailAdapter()
-  const submitFeedbackUseCase = new SubmitFeedbackUseCase(
-    prismaFeedbacksRepository,
-    nodemailerMailAdapter
-  )
+    const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
+    const nodemailerMailAdapter = new NodemailerMailAdapter()
+    const submitFeedbackUseCase = new SubmitFeedbackUseCase(
+      prismaFeedbacksRepository,
+      nodemailerMailAdapter
+    )
 
-  await submitFeedbackUseCase.execute({
-    type,
-    comment,
-    screenshot
-  })
+    await submitFeedbackUseCase.execute({
+      userId: String(uid),
+      type,
+      comment,
+      screenshot
+    })
 
-  return res.status(201).send()
-})
+    return res.status(201).send()
+  }
+)
