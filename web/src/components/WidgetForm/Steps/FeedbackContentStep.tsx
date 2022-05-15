@@ -28,10 +28,16 @@ export function FeedbackContentStep({
 
     setIsSendingFeedback(true)
 
+    const tokenId = localStorage.getItem('token')
+
     await api.post('/feedbacks', {
       type: feedbackType,
       comment,
       screenshot
+    }, {
+      headers: {
+        'Authorization': `Bearer ${tokenId}`
+      }
     })
 
     setIsSendingFeedback(false)

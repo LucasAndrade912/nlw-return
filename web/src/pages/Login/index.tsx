@@ -13,7 +13,7 @@ export function Login() {
     try {
       const { user } = await signInWithPopup(auth, provider)
       
-      const tokenId = await user.getIdToken()
+      const tokenId = await user.getIdToken(true)
       
       if (tokenId) {
         localStorage.setItem('token', tokenId)
