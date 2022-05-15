@@ -1,10 +1,13 @@
 import React from 'react'
 import { Disclosure, Transition } from '@headlessui/react'
 import { CaretDown, CaretUp } from 'phosphor-react'
-import { Feedback } from '../../components/Feedback'
-import { feedbacks } from '.'
+import { Feedback, FeedbackProps } from '../../components/Feedback'
 
-export function ShowFeedbacks() {
+interface ShowFeedbacksProps {
+  feedbacks: FeedbackProps[]
+}
+
+export function ShowFeedbacks({ feedbacks }: ShowFeedbacksProps) {
   return (
     <Disclosure as="div" className="col-span-4">
       { ({ open }) => (
@@ -47,12 +50,12 @@ export function ShowFeedbacks() {
             <Disclosure.Panel>
               <div className="dark:bg-zinc-900 bg-zinc-100 px-8 pb-8 rounded-b-2xl flex flex-col gap-y-4">
                 {
-                  feedbacks.map(({ feedbackType, feedbackText, linkForImage }, idx) => (
+                  feedbacks.map(({ type, comment, screenshot }, idx) => (
                     <Feedback
                       key={idx}
-                      feedbackType={feedbackType}
-                      feedbackText={feedbackText}
-                      linkForImage={linkForImage}
+                      type={type}
+                      comment={comment}
+                      screenshot={screenshot}
                     />
                   ))
                 }

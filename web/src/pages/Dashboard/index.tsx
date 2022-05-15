@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { FeedbackProps } from '../../components/Feedback'
 import { auth } from '../../firebase'
 import { api } from '../../lib/api'
-import { ShowFeedbacks } from './ShowFeedbacks'
+import { verifyMostSentFeedbackType } from '../../utils'
+import { Sections } from './Sections'
 import './style.css'
 
 interface AxiosResponseData {
@@ -11,6 +12,28 @@ interface AxiosResponseData {
 
 export function Dashboard() {
   const [feedbacks, setFeedbacks] = useState<FeedbackProps[]>([])
+
+  const totalImages = feedbacks.filter(feedback => {
+    if (feedback.screenshot) return feedback
+  }).length
+
+  const totalFeedbacksTypeBug = feedbacks.filter(feedback => {
+    if (feedback.type === 'BUG') return feedback
+  }).length
+
+  const totalFeedbacksTypeIdea = feedbacks.filter(feedback => {
+    if (feedback.type === 'IDEA') return feedback
+  }).length
+
+  const totalFeedbacksTypeOther = feedbacks.filter(feedback => {
+    if (feedback.type === 'OTHER') return feedback
+  }).length
+
+  const mostSentFeedbackType = verifyMostSentFeedbackType({
+    totalFeedbacksTypeBug,
+    totalFeedbacksTypeIdea,
+    totalFeedbacksTypeOther
+  })
 
   useEffect(() => {
     (async () => {
@@ -32,44 +55,13 @@ export function Dashboard() {
         Meus Feedbacks
       </h1>
 
-      <main
-        className="
-          w-[80%]
-          grid
-          grid-cols-4
-          gap-x-6
-          gap-y-8
-          m-auto
-          pb-8
-        "
-      >
-        <section className="section">
-          <p>Total de feedbacks:</p>
-          <p className="text-brand-500">4</p>
-        </section>
-
-        <section className="section">
-          <p>Total de imagens:</p>
-          <p className="text-brand-500">3</p>
-        </section>
-        
-        <section className="section col-span-2">
-          <p>Tipo de feedback mais enviado:</p>
-          <p>Problema</p>
-        </section>
-
-        <section className="section col-span-2">
-          <p>Total de feedbacks do tipo "Problema":</p>
-          <p className="text-brand-500">3</p>
-        </section>
-
-        <section className="section col-span-2">
-          <p>Total de feedbacks do tipo "Ideia":</p>
-          <p className="text-brand-500">1</p>
-        </section>
-
-        <ShowFeedbacks feedbacks={feedbacks} />
-      </main>
+      <Sections
+        feedbacks={feedbacks}
+        totalImages={totalImages}
+        totalFeedbacksTypeBug={totalFeedbacksTypeBug}
+        totalFeedbacksTypeIdea={totalFeedbacksTypeIdea}
+        mostSentFeedbackType={mostSentFeedbackType}
+      />
     </>
   )
 }
