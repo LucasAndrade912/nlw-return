@@ -5,6 +5,7 @@ import { CloseButton } from '../../CloseButton'
 import { ScreenshotButton } from '../ScreenshotButton'
 import { api } from '../../../lib/api'
 import { Loading } from '../../Loading'
+import { auth } from '../../../firebase'
 
 interface FeedbackContentStepProps {
   feedbackType: FeedbackType
@@ -28,7 +29,7 @@ export function FeedbackContentStep({
 
     setIsSendingFeedback(true)
 
-    const tokenId = localStorage.getItem('token')
+    const tokenId = await auth.currentUser?.getIdToken()
 
     await api.post('/feedbacks', {
       type: feedbackType,

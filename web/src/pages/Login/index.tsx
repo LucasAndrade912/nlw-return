@@ -11,13 +11,7 @@ export function Login() {
 
   async function handleLogin() {
     try {
-      const { user } = await signInWithPopup(auth, provider)
-      
-      const tokenId = await user.getIdToken(true)
-      
-      if (tokenId) {
-        localStorage.setItem('token', tokenId)
-      }
+      await signInWithPopup(auth, provider)
 
       setAuthenticated(true)
       navigate('/home')
@@ -30,7 +24,7 @@ export function Login() {
     if (authenticated) {
       navigate('/home')
     }
-  }, [])
+  }, [authenticated])
 
   return (
     <div

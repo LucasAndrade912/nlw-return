@@ -45,7 +45,7 @@ export function App() {
     } else {
       navigate('/login')
     }
-  }, [])
+  }, [authenticated])
 
   return (
     <>
