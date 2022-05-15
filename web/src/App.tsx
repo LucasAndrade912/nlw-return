@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
+import { AuthContext } from './routes'
 
 export type Theme = 'dark' | 'light'
 
 export function App() {
   const location = useLocation()
   const navigate = useNavigate()
+  const [authenticated] = useContext(AuthContext)!
   const [theme, setTheme] = useState<Theme>(getTheme())
 
   function getTheme() {
@@ -36,8 +38,12 @@ export function App() {
   }, [theme])
 
   useEffect(() => {
-    if (location.pathname === '/') {
-      navigate('/home')
+    if (authenticated) {
+      if (location.pathname === '/') {
+        navigate('/home')
+      }
+    } else {
+      navigate('/login')
     }
   }, [])
 
