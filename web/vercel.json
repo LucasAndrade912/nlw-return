@@ -1,20 +1,8 @@
 {
   "redirects": [
     {
-      "source": "/",
-      "destination": "https://nlw-return-brown.vercel.app/"
-    },
-    {
-      "source": "/home",
-      "destination": "https://nlw-return-brown.vercel.app/home"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "https://nlw-return-brown.vercel.app/dashboard"
-    },
-    {
-      "source": "/login",
-      "destination": "https://nlw-return-brown.vercel.app/login"
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
