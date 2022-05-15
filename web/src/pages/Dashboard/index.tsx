@@ -1,28 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FeedbackProps } from '../../components/Feedback'
+import { auth } from '../../firebase'
+import { api } from '../../lib/api'
 import { ShowFeedbacks } from './ShowFeedbacks'
-import bugImageUrl from '../../assets/bug.svg'
-import ideaImageUrl from '../../assets/idea.svg'
 import './style.css'
 
-export const feedbacks: FeedbackProps[] = [
-  {
-    feedbackType: {
-      source: bugImageUrl,
-      alt: 'Imagem de um inseto'
-    },
-    feedbackText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-  },
-  {
-    feedbackType: {
-      source: ideaImageUrl,
-      alt: 'Imagem de um lâmpada'
-    },
-    feedbackText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-  }
-]
+interface AxiosResponseData {
+  feedbacks: FeedbackProps[]
+}
 
 export function Dashboard() {
+  const [feedbacks, setFeedbacks] = useState<FeedbackProps[]>([])
+
+  useEffect(() => {
+    (async () => {
+      const tokenId = await auth.currentUser?.getIdToken()
+      
+      const { data } = await api.get<AxiosResponseData>('/feedbacks', {
+        headers: {
+          'Authorization': `Bearer ${tokenId}`
+        }
+      })
+
+      setFeedbacks(data.feedbacks)
+    })()
+  }, [])
+
   return (
     <>
       <h1 className="text-center text-3xl my-16">
@@ -65,7 +68,7 @@ export function Dashboard() {
           <p className="text-brand-500">1</p>
         </section>
 
-        <ShowFeedbacks />
+        <ShowFeedbacks feedbacks={feedbacks} />
       </main>
     </>
   )
