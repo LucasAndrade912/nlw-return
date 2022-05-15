@@ -1,7 +1,37 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { signInWithPopup } from 'firebase/auth'
+import { auth, provider } from '../../firebase'
+import { AuthContext } from '../../routes'
 import googleImgUrl from '../../assets/google-icon.svg'
 
 export function Login() {
+  const navigate = useNavigate()
+  const [authenticated, setAuthenticated] = useContext(AuthContext)!
+
+  async function handleLogin() {
+    try {
+      const { user } = await signInWithPopup(auth, provider)
+      
+      const tokenId = await user.getIdToken()
+      
+      if (tokenId) {
+        localStorage.setItem('token', tokenId)
+      }
+
+      setAuthenticated(true)
+      navigate('/home')
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  useEffect(() => {
+    if (authenticated) {
+      navigate('/home')
+    }
+  }, [])
+
   return (
     <div
       className="
@@ -26,6 +56,7 @@ export function Login() {
       </div>
 
       <button
+        onClick={handleLogin}
         className="
           mt-16
           rounded-md
