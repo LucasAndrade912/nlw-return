@@ -13,7 +13,7 @@ export interface FeedbackProps {
 
 export function Feedback({ feedbackType, feedbackText, linkForImage }: FeedbackProps) {
   return (
-    <div className="bg-zinc-800 flex p-6 items-center rounded-md relative">
+    <div className="dark:bg-zinc-800 bg-zinc-200 flex p-6 items-center rounded-md relative">
       <img
         className="mr-6 w-8"
         src={ feedbackType.source }

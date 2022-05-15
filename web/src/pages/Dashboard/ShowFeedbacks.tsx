@@ -20,8 +20,10 @@ export function ShowFeedbacks() {
                 items-center
                 h-[136px]
                 cursor-pointer
-                text-zinc-400
-                hover:text-zinc-100
+                text-zinc-600
+                hover:text-zinc-800
+                dark:text-zinc-400
+                dark:hover:text-zinc-100
                 transition-colors
               `}
             >
@@ -43,10 +45,11 @@ export function ShowFeedbacks() {
             leaveTo="transform scale-95 opacity-0"
           >
             <Disclosure.Panel>
-              <div className="bg-zinc-900 px-8 pb-8 rounded-b-2xl flex flex-col gap-y-4">
+              <div className="dark:bg-zinc-900 bg-zinc-100 px-8 pb-8 rounded-b-2xl flex flex-col gap-y-4">
                 {
-                  feedbacks.map(({ feedbackType, feedbackText, linkForImage }) => (
+                  feedbacks.map(({ feedbackType, feedbackText, linkForImage }, idx) => (
                     <Feedback
+                      key={idx}
                       feedbackType={feedbackType}
                       feedbackText={feedbackText}
                       linkForImage={linkForImage}
