@@ -9,7 +9,7 @@ interface ShowFeedbacksProps {
 
 export function ShowFeedbacks({ feedbacks }: ShowFeedbacksProps) {
   return (
-    <Disclosure as="div" className="col-span-4">
+    <Disclosure as="div" className="md:col-span-4">
       { ({ open }) => (
         <>
           <Disclosure.Button className="w-full">
@@ -19,6 +19,7 @@ export function ShowFeedbacks({ feedbacks }: ShowFeedbacksProps) {
                 ${open && 'rounded-b-none'}
                 flex
                 flex-row
+                pl-0
                 justify-center
                 items-center
                 h-[136px]
@@ -48,7 +49,7 @@ export function ShowFeedbacks({ feedbacks }: ShowFeedbacksProps) {
             leaveTo="transform scale-95 opacity-0"
           >
             <Disclosure.Panel>
-              <div className="dark:bg-zinc-900 bg-zinc-100 px-8 pb-8 rounded-b-2xl flex flex-col gap-y-4">
+              <div className="dark:bg-zinc-900 bg-zinc-100 px-8 pb-8 rounded-b-2xl flex flex-col gap-y-4 overflow-x-auto">
                 {
                   feedbacks.map(({ type, comment, screenshot }, idx) => (
                     <Feedback

@@ -3,7 +3,8 @@
     dark:bg-zinc-900
     bg-zinc-100
     shadow-lg
-    text-xl
+    text-base
+    md:text-xl
     py-8
     pl-6
     rounded-2xl
