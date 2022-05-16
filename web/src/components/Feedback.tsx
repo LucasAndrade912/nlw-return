@@ -36,7 +36,7 @@ export function Feedback({ type, comment, screenshot }: FeedbackProps) {
   }
 
   return (
-    <div className="dark:bg-zinc-800 bg-zinc-200 flex p-6 items-center rounded-md relative w-[500px]">
+    <div className="dark:bg-zinc-800 bg-zinc-200 flex p-6 items-center rounded-md relative w-[500px] md:w-auto">
       <img
         className="mr-6 w-8"
         src={ image.source }
