@@ -28,7 +28,7 @@ Para executar o aplicativo mobile será necessário instalar o app "Expo Go" no 
 
 - ⚙️ Back-end e Front-end
 
-  - Execute o comando ```ǹpm run dev``` ou ```yarn dev``` nas pastas "server" e "web". Após isto a aplicação web será aberta em http://localhost:3000.
+  - Execute o comando ```npm run dev``` ou ```yarn dev``` nas pastas "server" e "web". Após isto a aplicação web será aberta em http://localhost:3000.
 
 - 📲 Mobile
 
