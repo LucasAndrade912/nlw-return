@@ -20,7 +20,7 @@ Basta fazer um clone do repositório usando o git:
 git clone https://github.com/LucasAndrade912/nlw-return.git
 ```
 
-Dentro das pastas "server" e "web" remove o nome "-sample". É necessário preencher estes arquivos com seus respectivos dados.
+Dentro das pastas "server" e "web" encontre o arquivo .env-sample e remove o "-sample". É necessário preencher estes arquivos com seus respectivos dados.
 
 Para executar o aplicativo mobile será necessário instalar o app "Expo Go" no seu celular.
 
